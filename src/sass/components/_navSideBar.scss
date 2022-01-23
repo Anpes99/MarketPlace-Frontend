@@ -1,0 +1,41 @@
+.nav {
+  box-shadow: 0 2rem 4rem rgba($color-black, 0.2);
+
+  border-radius: 1rem;
+  min-width: 33.33333%;
+  background-color: $color-secondary-light;
+  background-image: linear-gradient(
+    to bottom,
+    $color-primary,
+    $color-primary-light
+  );
+  box-sizing: border-box;
+
+  padding: 5rem;
+
+  &__select-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__select-item {
+    display: block;
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    font-family: sans-serif;
+    color: $color-grey-dark;
+    font-weight: 500;
+  }
+
+  &__submit {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+  }
+
+  &__label {
+    color: $color-grey-dark-3;
+    width: 100%;
+  }
+}

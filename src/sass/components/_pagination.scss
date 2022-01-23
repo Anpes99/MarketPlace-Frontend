@@ -1,0 +1,11 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__item {
+    text-decoration: none;
+    color: black;
+    font-size: 1.3rem;
+    margin: 1rem 1rem;
+  }
+}

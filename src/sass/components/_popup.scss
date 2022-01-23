@@ -1,0 +1,63 @@
+.popup {
+  min-width: 30rem;
+
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  background-color: rgba($color-black, 0.3);
+  opacity: 0;
+  z-index: -100;
+
+  &__signin {
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.5s;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.25);
+    background-image: linear-gradient(
+      to bottom,
+      $color-primary-light,
+      $color-primary
+    );
+    width: 50rem;
+    height: 50rem;
+    z-index: -100;
+    opacity: 0;
+    &-close {
+      text-decoration: none;
+      align-self: flex-end;
+    }
+
+    &-username {
+      margin-top: auto;
+      border-radius: 1rem;
+      padding: 0.5rem 1rem;
+    }
+    &-password {
+      border-radius: 1rem;
+      padding: 0.5rem 1rem;
+      margin-top: 2rem;
+      margin-bottom: auto;
+    }
+  }
+  &:target {
+    z-index: 200;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &:target &__signin {
+    z-index: 220 !important;
+    opacity: 1;
+
+    transform: translate(-50%, -50%) scale(1);
+  }
+}

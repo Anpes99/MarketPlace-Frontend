@@ -1,0 +1,50 @@
+// COLORS
+$color-primary: #628395;
+$color-primary-light: #a0b5c0;
+$color-primary-dark: #2c3b43;
+
+$color-secondary-light: #96897b;
+$color-secondary-dark: #544b43;
+
+$color-tertiary-light: #d0ce7c;
+$color-tertiary-dark: #aba83d;
+
+//$color-grey-light-1: #f7f7f7;
+//$color-grey-light-2: #eee;
+
+$color-grey-dark: #777;
+//$color-grey-dark-2: #999;
+//$color-grey-dark-3: #333;
+
+$color-white: #fff;
+$color-black: #000;
+
+$color-grey-light-1: #faf9f9;
+$color-grey-light-2: #f4f2f2;
+$color-grey-light-3: #f0eeee;
+$color-grey-light-4: #ccc;
+$color-grey-dark-1: #333;
+$color-grey-dark-2: #777;
+$color-grey-dark-3: #999;
+$shadow-dark: 0 2rem 6rem rgba(0, 0, 0, 0.3);
+$shadow-light: 0 2rem 5rem rgba(0, 0, 0, 0.06);
+$line: 1px solid $color-grey-light-2;
+
+// FONT VARIABLES
+$font-primary: "Nunito", sans-serif;
+$font-display: "Josefin Sans", sans-serif;
+
+$default-font-size: 1.6rem;
+
+// GRID
+$grid-width: 114rem;
+$gutter-vertical: 8rem;
+$gutter-vertical-small: 6rem;
+$gutter-horizontal: 6rem;
+
+// RESPONSIVE BREAKPOINTS
+$bp-largest: 75em; // 1200px
+$bp-large: 62.5em; // 1000px
+$bp-medium: 50em; // 800px;
+$bp-small: 31.25em; // 500px;
+$bp-smallest: 21.875em; // 350px;
