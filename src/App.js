@@ -4,29 +4,33 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePageView from "./components/HomePage/HomePageView";
 import ItemsPageView from "./components/ItemsPage/ItemsPageView";
-import SellItemForm from "./components/SellItemForm";
+import SellView from "./components/SellView";
+import UserContext from "./contexts/UserContext";
 
 const App = () => {
-  // const [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
 
-  /* useEffect(() => {
-    const loggedInUser = window.localStorage.getItem("loggedInUser");
-    console.log("logged user :  ", loggedInUser);
+  useEffect(() => {
+    const loggedInUser = window.localStorage.getItem("loggedInMarketPlaceUser");
     loggedInUser !== null ? setUser(JSON.parse(loggedInUser)) : setUser(null);
-  }, []);*/
+  }, []);
+
+  // useContext(AuthStorageContext);
 
   return (
     <div>
       <Router>
-        <Header />
-        <main>
-          <Routes>
-            <Route path="/browse" element={<ItemsPageView />} />
-            <Route path="/sell" element={<SellItemForm />} />
-            <Route path="/" element={<HomePageView />} />
-          </Routes>{" "}
-        </main>
-        <Footer />
+        <UserContext.Provider value={user}>
+          <Header />
+          <main>
+            <Routes>
+              <Route path="/browse" element={<ItemsPageView />} />
+              <Route path="/sell" element={<SellView />} />
+              <Route path="/" element={<HomePageView />} />
+            </Routes>{" "}
+          </main>
+          <Footer />
+        </UserContext.Provider>
       </Router>
     </div>
   );

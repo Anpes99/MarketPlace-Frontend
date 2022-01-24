@@ -1,0 +1,33 @@
+.sell {
+  height: 80vh;
+  &__form {
+    position: relative;
+    height: 100rem;
+    padding: 5rem;
+    margin: 10rem 0 5rem 0;
+    display: flex;
+    align-items: center;
+    background-color: $color-primary-light;
+    justify-content: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      flex-direction: column;
+      &__file-upload {
+        position: absolute;
+        bottom: 15rem;
+        left: 50%;
+        transform: translatex(-50%);
+      }
+    }
+  }
+
+  &__button {
+    margin-top: 4rem;
+  }
+  @media only screen and (max-width: $bp-medium) {
+    &__button {
+      position: absolute;
+      bottom: 3rem;
+    }
+  }
+}

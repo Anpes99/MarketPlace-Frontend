@@ -59,12 +59,11 @@ const SignIn = () => {
     const { username, password } = values;
 
     try {
-      await signIn({ username, password });
-      if (error || !success) {
+      const response = await signIn({ username, password });
+      if (response.status !== 200) {
         console.log(error);
         console.log("error while logging in: ", error?.message);
-      }
-      if (success) {
+      } else {
         console.log("success");
         navigate("/");
       }

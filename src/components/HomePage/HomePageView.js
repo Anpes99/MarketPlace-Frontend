@@ -9,11 +9,9 @@ const HomePageView = ({ setUser, user }) => {
   const [premiumItems, setPremiumItems] = useState([]);
 
   useEffect(async () => {
-    let newestItems = await axios.get(
-      `http://localhost:3001/api/items?page=1&count=9`
-    );
+    let newestItems = await axios.get(`/api/items?page=1&count=9`);
     let premItems = await axios.get(
-      `http://localhost:3001/api/subscriptions/premiumVisibility?count=16`
+      `/api/subscriptions/premiumVisibility?count=16`
     );
     setItems(newestItems.data.docs);
     console.log(premItems);
@@ -77,7 +75,7 @@ const HomePageView = ({ setUser, user }) => {
           {categories.map((category) => (
             <a
               className="popular-categories__list-item"
-              href={`http://localhost:3000/browse?category=${category}`}
+              href={`/browse?category=${category}`}
             >
               {category}
             </a>

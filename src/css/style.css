@@ -812,3 +812,29 @@ body {
     justify-self: end;
     margin: 1rem 1rem 0 0;
     fill: #628395; }
+
+.sell {
+  height: 80vh; }
+  .sell__form {
+    position: relative;
+    height: 100rem;
+    padding: 5rem;
+    margin: 10rem 0 5rem 0;
+    display: flex;
+    align-items: center;
+    background-color: #a0b5c0;
+    justify-content: center; }
+    @media only screen and (max-width: 50em) {
+      .sell__form {
+        flex-direction: column; }
+        .sell__form__file-upload {
+          position: absolute;
+          bottom: 15rem;
+          left: 50%;
+          transform: translatex(-50%); } }
+  .sell__button {
+    margin-top: 4rem; }
+  @media only screen and (max-width: 50em) {
+    .sell__button {
+      position: absolute;
+      bottom: 3rem; } }

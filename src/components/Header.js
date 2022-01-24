@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import logo from "../images/logo.png";
-import useSignIn from "../hooks/useSignIn";
 import { useNavigate } from "react-router-dom";
 import SignIn from "./Formik/SignIn";
+import useUser from "../hooks/useUser";
 
 const Header = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const user = useUser();
 
   return (
     <header className="header">
@@ -30,12 +31,33 @@ const Header = () => {
           </svg>
         </button>
       </form>
-      <a
-        href="#signinpopup"
-        className="header__signin btn btn--light u-margin-right-small"
-      >
-        Sign In
-      </a>
+      <div>
+        <a
+          href="/sell"
+          className="header__sell btn btn--light u-margin-right-small"
+        >
+          Sell Items
+        </a>
+        {!user && (
+          <a
+            href="#signinpopup"
+            className="header__signin btn btn--light u-margin-right-small"
+          >
+            Sign In
+          </a>
+        )}
+        {user && (
+          <a
+            href="/"
+            className="header__signin btn btn--light u-margin-right-small"
+            onClick={() => {
+              localStorage.removeItem("loggedInMarketPlaceUser");
+            }}
+          >
+            Sign Out
+          </a>
+        )}
+      </div>
       <div id="signinpopup" className="popup">
         <form className="popup__signin">
           <a

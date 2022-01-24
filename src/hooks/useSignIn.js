@@ -7,7 +7,7 @@ const useSignIn = () => {
 
   const signIn = async ({ username, password }) => {
     try {
-      const response = await axios.post("http://localhost:3001/api/login", {
+      const response = await axios.post("/api/login", {
         username,
         password,
       });
@@ -16,10 +16,11 @@ const useSignIn = () => {
       if (response.status === 200 && response.data.token) {
         setSuccess(true);
         localStorage.setItem(
-          JSON.stringify("loggedInMarketPlaceUser"),
-          response.data.token
+          "loggedInMarketPlaceUser",
+          JSON.stringify(response.data.token)
         );
       }
+      return response;
     } catch (error) {
       console.log(error);
       setError(error);

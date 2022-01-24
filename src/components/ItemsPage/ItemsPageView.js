@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { categories, locations } from "../../utils/data";
 import SearchItems from "../SearchItems";
-import skiis from "../../images/skiis.png";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { toBase64 } from "../../utils/utils";
@@ -35,12 +33,7 @@ const ItemsPageView = ({ setUser, user }) => {
 
   useEffect(async () => {
     let result = await axios.get(
-      `http://localhost:3001/api/items${formatQueryParams(
-        currentPage,
-        0,
-        category,
-        location
-      )}`
+      `/api/items${formatQueryParams(currentPage, 0, category, location)}`
     );
     console.log("res: ", result);
     setData(result);

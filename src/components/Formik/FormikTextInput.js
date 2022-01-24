@@ -1,13 +1,14 @@
 import React from "react";
 import { useField } from "formik";
 
-const FormikTextInput = ({ multiline, testID, name, ...props }) => {
+const FormikTextInput = ({ name, ...props }) => {
   const [field, meta, helpers] = useField(name); // useField has to be under Formik component to work
   const showError = meta.touched && meta.error;
 
   return (
     <div>
       <input
+        type={props.type ? props.type : "text"}
         className="form__input u-margin-auto-vertical"
         onChange={(event) => helpers.setValue(event.target.value)}
         onBlur={() => helpers.setTouched(true)}

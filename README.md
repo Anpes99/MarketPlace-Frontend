@@ -16,6 +16,10 @@ url:
 - search items
 - browse paginated items with filters
 
+/sell
+
+- post items for sale
+
 other features:
 
-- sign in
+- sign in/out
