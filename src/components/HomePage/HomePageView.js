@@ -9,13 +9,13 @@ const HomePageView = ({ setUser, user }) => {
   const [premiumItems, setPremiumItems] = useState([]);
 
   useEffect(async () => {
-    let newestItems = await axios.get(`/api/items?page=1&count=9`);
+    let newestItems = await axios.get(`/api/items?page=1&limit=12`);
     let premItems = await axios.get(
-      `/api/subscriptions/premiumVisibility?count=16`
+      `/api/items?limit=16&premium=true&shuffle=true`
     );
     setItems(newestItems.data.docs);
     console.log(premItems);
-    setPremiumItems(premItems.data);
+    setPremiumItems(premItems.data.docs);
   }, []);
 
   return (
@@ -29,14 +29,12 @@ const HomePageView = ({ setUser, user }) => {
                 class="gallery__img"
                 style={{
                   backgroundImage: `url(data:image/png;base64,${
-                    item?.item.img?.data
-                      ? toBase64(item?.item.img?.data.data)
-                      : null
+                    item?.img?.data ? toBase64(item?.img?.data.data) : null
                   })`,
                 }}
               ></div>
-              <div className="gallery__name">{item.item.name}</div>
-              <div className="gallery__price">{item.item.price}€</div>
+              <div className="gallery__name">{item.name}</div>
+              <div className="gallery__price">{item.price}€</div>
             </figure>
           ))}
         </div>
@@ -56,7 +54,7 @@ const HomePageView = ({ setUser, user }) => {
                   class="newest__img"
                   style={{
                     backgroundImage: `url(data:image/png;base64,${
-                      item?.img?.data ? toBase64(item?.img?.data.data) : null
+                      item?.img?.data ? toBase64(item?.img?.data?.data) : null
                     })`,
                   }}
                 ></div>

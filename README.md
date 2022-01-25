@@ -17,6 +17,7 @@ url:
 
 - search items
 - browse paginated items with filters
+- add favourite items
 
 /sell
 

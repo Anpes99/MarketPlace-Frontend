@@ -3,6 +3,7 @@ import SearchItems from "../SearchItems";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { toBase64 } from "../../utils/utils";
+import useUser from "../../hooks/useUser";
 
 const formatQueryParams = (currentPage, plusToPage, category, location) => {
   let queryParams = `?page=${currentPage + plusToPage}`;
@@ -11,13 +12,36 @@ const formatQueryParams = (currentPage, plusToPage, category, location) => {
   return queryParams;
 };
 
-const ItemsPageView = ({ setUser, user }) => {
+const ItemsPageView = () => {
   const [data, setData] = useState([]);
+  const [userFavourites, setUserFavourites] = useState([]);
+
   const [searchParams, setSearchParams] = useSearchParams();
+  const user = useUser();
+
   let currentPage = Number(searchParams.get("page"));
   if (!currentPage) currentPage = 1;
 
-  const handleFavourite = (itemId) => {};
+  const handleFavourite = async (itemId, isFavourite) => {
+    console.log("rgserg");
+
+    if (user) {
+      if (!isFavourite) {
+        console.log("user: ", user);
+        setUserFavourites(userFavourites.concat(itemId));
+        const result = await axios.post(
+          `http://localhost:3001/api/users/${user.data.username}/favourites/${itemId}`
+        );
+        console.log(result);
+      } else if (isFavourite) {
+        setUserFavourites(userFavourites.filter((id) => id !== itemId));
+        const result = await axios.delete(
+          `http://localhost:3001/api/users/${user.data.username}/favourites/${itemId}`
+        );
+        console.log(result);
+      }
+    }
+  };
 
   let category = searchParams.get("category");
   console.log(category);
@@ -39,7 +63,12 @@ const ItemsPageView = ({ setUser, user }) => {
     setData(result);
     console.log(result);
   }, []);
+  useEffect(async () => {
+    if (user)
+      setUserFavourites(user.data.favourites.map((favourite) => favourite.id));
+  }, [user]);
 
+  console.log(userFavourites[0]);
   return (
     <div className="items-page">
       <div className="items-page__nav">
@@ -70,20 +99,38 @@ const ItemsPageView = ({ setUser, user }) => {
                   {item.location}, {item.user.name}
                 </span>
                 <span className="items-page__date"> {item.date}</span>
-                <svg
-                  onClick={() => {
-                    handleFavourite(item.id);
-                  }}
-                  className="items-page__star"
-                  version="1.1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                >
-                  <title>star</title>
-                  <path d="M16 23l9 6-4-10 9-6h-10l-4-10-4 10h-10l9 6-4 10 9-6zM16 21.753l-6.8 4.547 3.2-7.7-7.2-4.6h7.5l3.3-8.5 3.3 8.5h7.5l-7.2 4.6 3.2 7.7-6.8-4.547z"></path>
-                </svg>
+                {!userFavourites.includes(item.id) && (
+                  <svg
+                    onClick={() => {
+                      handleFavourite(item.id, false);
+                    }}
+                    className="items-page__star"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                  >
+                    <title>star-empty</title>
+                    <path d="M32 12.408l-11.056-1.607-4.944-10.018-4.944 10.018-11.056 1.607 8 7.798-1.889 11.011 9.889-5.199 9.889 5.199-1.889-11.011 8-7.798zM16 23.547l-6.983 3.671 1.334-7.776-5.65-5.507 7.808-1.134 3.492-7.075 3.492 7.075 7.807 1.134-5.65 5.507 1.334 7.776-6.983-3.671z"></path>
+                  </svg>
+                )}
+                {userFavourites.includes(item.id) && (
+                  <svg
+                    onClick={() => {
+                      handleFavourite(item.id, true);
+                    }}
+                    className="items-page__star"
+                    version="1.1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                  >
+                    <title>star-full</title>
+                    <path d="M32 12.408l-11.056-1.607-4.944-10.018-4.944 10.018-11.056 1.607 8 7.798-1.889 11.011 9.889-5.199 9.889 5.199-1.889-11.011 8-7.798z"></path>
+                  </svg>
+                )}
               </div>
             );
           })}

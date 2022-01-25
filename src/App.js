@@ -6,13 +6,22 @@ import HomePageView from "./components/HomePage/HomePageView";
 import ItemsPageView from "./components/ItemsPage/ItemsPageView";
 import SellView from "./components/SellView";
 import UserContext from "./contexts/UserContext";
+import axios from "axios";
 
 const App = () => {
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const loggedInUser = window.localStorage.getItem("loggedInMarketPlaceUser");
-    loggedInUser !== null ? setUser(JSON.parse(loggedInUser)) : setUser(null);
+  useEffect(async () => {
+    let loggedInUser = localStorage.getItem("loggedInMarketPlaceUser");
+
+    if (loggedInUser) {
+      loggedInUser = await axios.get(
+        "http://localhost:3001/api/users/anpes99/favourites?fields=id"
+      );
+      setUser(loggedInUser);
+    } else {
+      setUser(null);
+    }
   }, []);
 
   // useContext(AuthStorageContext);
