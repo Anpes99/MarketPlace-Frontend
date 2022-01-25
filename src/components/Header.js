@@ -7,6 +7,7 @@ import useUser from "../hooks/useUser";
 const Header = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [searchWord, setSearchWord] = useState("");
   const navigate = useNavigate();
   const user = useUser();
 
@@ -15,9 +16,19 @@ const Header = () => {
       <a href="/">
         <img className="header__logo" src={logo}></img>
       </a>
-      <form action="#" class="search">
-        <input type="text" class="search__input" placeholder="Search Items" />
-        <button class="search__button">
+      <form action="/browse" class="search">
+        <input type="hidden" name="searchWord" value={searchWord} />
+        <input
+          onChange={(event) => setSearchWord(event.target.value)}
+          type="text"
+          class="search__input"
+          placeholder="Search Items"
+        />
+        <button
+          href={`/browse?searchWord=${searchWord}`}
+          type="submit"
+          class="search__button"
+        >
           <svg
             class="search__icon"
             version="1.1"

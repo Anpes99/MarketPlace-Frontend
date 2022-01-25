@@ -4,12 +4,18 @@ import { categories, locations } from "../utils/data";
 const SearchItems = () => {
   const [location, setLocation] = useState(locations[0]);
   const [category, setCategory] = useState(categories[0]);
+  const [searchWord, setSearchWord] = useState("");
 
   return (
     <div className="nav">
       nav
       <h2 className="heading-2 heading-2--light">Search items</h2>
       <form className="nav__select-form">
+        <input
+          type="text"
+          className="nav__input u-margin-top-medium"
+          onChange={(event) => setSearchWord(event.target.value)}
+        />
         <label className="nav__label" for="locations">
           location:
         </label>
@@ -46,7 +52,7 @@ const SearchItems = () => {
         </select>
 
         <a
-          href={`/browse?location=${location}&category=${category}`}
+          href={`/browse?location=${location}&category=${category}&searchWord=${searchWord}`}
           className="btn btn--light  u-margin-top-small u-margin-center"
         >
           search

@@ -209,6 +209,9 @@ body {
 .u-margin-top-small {
   margin-top: 1.5rem !important; }
 
+.u-margin-top-medium {
+  margin-top: 4rem !important; }
+
 .u-margin-top-big {
   margin-top: 8rem !important; }
 
@@ -339,6 +342,18 @@ body {
   .nav__label {
     color: #999;
     width: 100%; }
+  .nav__input {
+    font-size: 1.8rem;
+    font-family: inherit;
+    color: #777;
+    padding: 1.5rem 2rem;
+    border-radius: 2px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-bottom: 3px solid transparent;
+    width: 90%;
+    display: block;
+    transition: all 0.3s; }
 
 .popup {
   min-width: 30rem;

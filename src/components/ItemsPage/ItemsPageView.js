@@ -5,10 +5,19 @@ import axios from "axios";
 import { toBase64 } from "../../utils/utils";
 import useUser from "../../hooks/useUser";
 
-const formatQueryParams = (currentPage, plusToPage, category, location) => {
+const formatQueryParams = (
+  currentPage,
+  plusToPage,
+  category,
+  location,
+  searchword
+) => {
   let queryParams = `?page=${currentPage + plusToPage}`;
   queryParams = category ? queryParams + `&category=${category}` : queryParams;
   queryParams = location ? queryParams + `&location=${location}` : queryParams;
+  queryParams = searchword
+    ? queryParams + `&searchWord=${searchword}`
+    : queryParams;
   return queryParams;
 };
 
@@ -46,18 +55,20 @@ const ItemsPageView = () => {
   let category = searchParams.get("category");
   console.log(category);
   let location = searchParams.get("location");
-
-  let queryParams = `?page=${currentPage}`;
-  queryParams = category ? queryParams + `&category=${category}` : queryParams;
-  queryParams = location ? queryParams + `&location=${location}` : queryParams;
-
+  let searchWord = searchParams.get("searchWord");
   console.log(location);
 
   let pages;
 
   useEffect(async () => {
     let result = await axios.get(
-      `/api/items${formatQueryParams(currentPage, 0, category, location)}`
+      `/api/items${formatQueryParams(
+        currentPage,
+        0,
+        category,
+        location,
+        searchWord
+      )}`
     );
     console.log("res: ", result);
     setData(result);
@@ -77,7 +88,7 @@ const ItemsPageView = () => {
       <div className="items-page__list">
         <div className="u-margin-top-small u-margin-left-small">
           category: {category ? category : "all"} location:{" "}
-          {location ? location : "all"}
+          {location ? location : "all"} {searchWord && "name: " + searchWord}
         </div>
         <div className=" heading-4 u-margin-left-small">
           items found: {data?.data?.totalDocs}
@@ -143,7 +154,8 @@ const ItemsPageView = () => {
                 currentPage,
                 -1,
                 category,
-                location
+                location,
+                searchWord
               )}`}
             >
               prev
@@ -157,7 +169,8 @@ const ItemsPageView = () => {
                 currentPage,
                 1,
                 category,
-                location
+                location,
+                searchWord
               )}`}
             >
               next
