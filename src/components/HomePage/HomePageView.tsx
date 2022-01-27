@@ -4,18 +4,21 @@ import SearchItems from "../SearchItems";
 import axios from "axios";
 import { toBase64 } from "../../utils/utils";
 
-const HomePageView = ({ setUser, user }) => {
+const HomePageView = () => {
   const [newestItems, setItems] = useState([]);
   const [premiumItems, setPremiumItems] = useState([]);
 
-  useEffect(async () => {
-    let newestItems = await axios.get(`/api/items?page=1&limit=12`);
+  useEffect(() => {
+    
+    async function fetchData() {let newestItems = await axios.get(`/api/items?page=1&limit=12`);
     let premItems = await axios.get(
       `/api/items?limit=16&premium=true&shuffle=true`
     );
+    console.log(newestItems);
     setItems(newestItems.data.docs);
     console.log(premItems);
-    setPremiumItems(premItems.data.docs);
+    setPremiumItems(premItems.data.docs);}
+    fetchData()
   }, []);
 
   return (
@@ -26,7 +29,7 @@ const HomePageView = ({ setUser, user }) => {
           {premiumItems.map((item, index) => (
             <figure className={`gallery__item gallery__item--${index + 1}`}>
               <div
-                class="gallery__img"
+                className="gallery__img"
                 style={{
                   backgroundImage: `url(data:image/png;base64,${
                     item?.img?.data ? toBase64(item?.img?.data.data) : null
@@ -51,7 +54,7 @@ const HomePageView = ({ setUser, user }) => {
             return (
               <figure className={`newest__item newest__item--${index + 1}`}>
                 <div
-                  class="newest__img"
+                  className="newest__img"
                   style={{
                     backgroundImage: `url(data:image/png;base64,${
                       item?.img?.data ? toBase64(item?.img?.data?.data) : null

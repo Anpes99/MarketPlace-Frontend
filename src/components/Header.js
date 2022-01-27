@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../images/logo.png";
 import { useNavigate } from "react-router-dom";
 import SignIn from "./Formik/SignIn";
@@ -10,7 +10,9 @@ const Header = () => {
   const [searchWord, setSearchWord] = useState("");
   const navigate = useNavigate();
   const user = useUser();
-
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
   return (
     <header className="header">
       <a href="/">

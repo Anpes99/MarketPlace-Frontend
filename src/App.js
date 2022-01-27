@@ -16,7 +16,7 @@ const App = () => {
 
     if (loggedInUser) {
       loggedInUser = await axios.get(
-        "http://localhost:3001/api/users/anpes99/favourites?fields=id"
+        "http://localhost:3001/api/items/user/anpes99/favourites?fields=id"
       );
       setUser(loggedInUser);
     } else {

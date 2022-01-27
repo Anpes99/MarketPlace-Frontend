@@ -22,7 +22,7 @@ const formatQueryParams = (
 };
 
 const ItemsPageView = () => {
-  const [data, setData] = useState([]);
+  const [data, setData]:any = useState({});
   const [userFavourites, setUserFavourites] = useState([]);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -39,13 +39,13 @@ const ItemsPageView = () => {
         console.log("user: ", user);
         setUserFavourites(userFavourites.concat(itemId));
         const result = await axios.post(
-          `http://localhost:3001/api/users/${user.data.username}/favourites/${itemId}`
+          `http://localhost:3001/api/items/user/${user.data.username}/favourites/${itemId}`
         );
         console.log(result);
       } else if (isFavourite) {
         setUserFavourites(userFavourites.filter((id) => id !== itemId));
         const result = await axios.delete(
-          `http://localhost:3001/api/users/${user.data.username}/favourites/${itemId}`
+          `http://localhost:3001/api/items/user/${user.data.username}/favourites/${itemId}`
         );
         console.log(result);
       }
@@ -60,8 +60,8 @@ const ItemsPageView = () => {
 
   let pages;
 
-  useEffect(async () => {
-    let result = await axios.get(
+  useEffect(() => {                   // item[]
+    async function fetchData() {let result:any[any] = await axios.get(
       `/api/items${formatQueryParams(
         currentPage,
         0,
@@ -71,10 +71,15 @@ const ItemsPageView = () => {
       )}`
     );
     console.log("res: ", result);
+    console.log("res: ", typeof result);
     setData(result);
-    console.log(result);
+    console.log(result);}
+    fetchData()
   }, []);
-  useEffect(async () => {
+
+
+
+  useEffect(() => {
     if (user)
       setUserFavourites(user.data.favourites.map((favourite) => favourite.id));
   }, [user]);
@@ -91,6 +96,7 @@ const ItemsPageView = () => {
           {location ? location : "all"} {searchWord && "name: " + searchWord}
         </div>
         <div className=" heading-4 u-margin-left-small">
+        
           items found: {data?.data?.totalDocs}
         </div>
         <div>

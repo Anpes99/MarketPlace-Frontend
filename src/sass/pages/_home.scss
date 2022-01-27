@@ -11,6 +11,7 @@
 
     @media only screen and (max-width: $bp-medium) {
       flex-direction: column;
+      align-items: center;
     }
   }
 }
@@ -145,6 +146,9 @@
   &__heading {
     display: block;
     text-align: center;
+  }
+  @media only screen and (max-width: $bp-medium) {
+    margin: 0;
   }
 
   &__items-box {

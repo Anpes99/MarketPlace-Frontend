@@ -4,7 +4,8 @@ import FormikTextInput from "./FormikTextInput";
 import * as yup from "yup";
 import useSignIn from "../../hooks/useSignIn";
 import { useNavigate } from "react-router-dom";
-
+import { Credentials } from "../../types/types";
+import axios, { AxiosResponse } from "axios";
 const initialValues = {
   username: "",
   password: "",
@@ -30,14 +31,16 @@ const validationSchema = yup.object().shape({
   });
 */
 
-export const SignInContainer = ({ onSubmit }) => {
+export const SignInContainer = ({ onSubmit}) => {
+  console.log("here2")
+
   return (
     <Formik
       validationSchema={validationSchema}
       initialValues={initialValues}
       onSubmit={onSubmit}
     >
-      {({ handleSubmit }) => (
+      {({ handleSubmit }:any) => (
         <div className="ffformik">
           <FormikTextInput name="username" placeholder="Username" />
           <FormikTextInput name="password" placeholder="Password" />
@@ -50,13 +53,14 @@ export const SignInContainer = ({ onSubmit }) => {
     </Formik>
   );
 };
-
+//type props = Array<{signIn:({ username, password }:Credentials)=>Promise<AxiosResponse<any, any>>, success?:boolean, error?: unknown|null}>
 const SignIn = () => {
-  const [signIn, success, error] = useSignIn();
+  const [signIn, error] : any= useSignIn();
   const navigate = useNavigate();
 
-  const onSubmit = async (values) => {
+  const onSubmit = async (values: Credentials):Promise<any> => {
     const { username, password } = values;
+    console.log("here3")
 
     try {
       const response = await signIn({ username, password });
