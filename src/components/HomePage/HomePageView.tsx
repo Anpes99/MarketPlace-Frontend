@@ -3,10 +3,14 @@ import { categories, locations } from "../../utils/data";
 import SearchItems from "../SearchItems";
 import axios from "axios";
 import { toBase64 } from "../../utils/utils";
+import { useNavigate } from "react-router-dom";
+
 
 const HomePageView = () => {
   const [newestItems, setItems] = useState([]);
   const [premiumItems, setPremiumItems] = useState([]);
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     
@@ -52,7 +56,7 @@ const HomePageView = () => {
               return null;
             }
             return (
-              <figure className={`newest__item newest__item--${index + 1}`}>
+              <figure onClick={()=>{navigate(`/item/${item?.id}`)}} className={`newest__item newest__item--${index + 1}`}>
                 <div
                   className="newest__img"
                   style={{
@@ -76,7 +80,8 @@ const HomePageView = () => {
           {categories.map((category) => (
             <a
               className="popular-categories__list-item"
-              href={`/browse?category=${category}`}
+              onClick={()=>navigate(`/browse?category=${category}`)}
+
             >
               {category}
             </a>

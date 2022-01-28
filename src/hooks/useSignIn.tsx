@@ -19,7 +19,7 @@ const useSignIn = () => {
       console.log(response);
       if (response.status === 200 && response.data.token) {
         console.log("here1")
-  
+  console.log(response)
         setSuccess(true);
         localStorage.setItem(
           "loggedInMarketPlaceUser",

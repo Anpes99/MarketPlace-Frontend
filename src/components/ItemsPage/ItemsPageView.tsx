@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { toBase64 } from "../../utils/utils";
 import useUser from "../../hooks/useUser";
+import { useNavigate } from "react-router-dom";
 
 const formatQueryParams = (
   currentPage,
@@ -27,6 +28,7 @@ const ItemsPageView = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const user = useUser();
+  const navigate = useNavigate()
 
   let currentPage = Number(searchParams.get("page"));
   if (!currentPage) currentPage = 1;
@@ -156,13 +158,14 @@ const ItemsPageView = () => {
           {data?.data?.prevPage && (
             <a
               className="pagination__item"
-              href={`/browse${formatQueryParams(
+              onClick={()=>navigate(`/browse${formatQueryParams(
                 currentPage,
                 -1,
                 category,
                 location,
                 searchWord
-              )}`}
+              )}`)}
+     
             >
               prev
             </a>
@@ -171,13 +174,16 @@ const ItemsPageView = () => {
           {data?.data?.nextPage && (
             <a
               className="pagination__item"
-              href={`/browse${formatQueryParams(
+
+              onClick={()=>navigate(`/browse${formatQueryParams(
                 currentPage,
                 1,
                 category,
                 location,
                 searchWord
-              )}`}
+              )}`)}
+              
+
             >
               next
             </a>

@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import logo from "../images/logo.png";
 import { useNavigate } from "react-router-dom";
 import SignIn from "./Formik/SignIn";
+import SignUp from "./Formik/SignUp";
 import useUser from "../hooks/useUser";
 
 const Header = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [searchWord, setSearchWord] = useState("");
+  const [signUpVisible, setSignUpVisible] = useState(false);
   const navigate = useNavigate();
   const user = useUser();
   useEffect(() => {
@@ -44,7 +46,7 @@ const Header = () => {
           </svg>
         </button>
       </form>
-      <div>
+      <div className="header__buttons-box">
         <a
           href="/sell"
           className="header__sell btn btn--light u-margin-right-small"
@@ -79,7 +81,8 @@ const Header = () => {
           >
             close
           </a>
-          <SignIn />
+          {!signUpVisible && <SignIn setSignUpVisible={setSignUpVisible} />}
+          {signUpVisible && <SignUp setSignUpVisible={setSignUpVisible} />}
         </form>
       </div>
     </header>

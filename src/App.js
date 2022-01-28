@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomePageView from "./components/HomePage/HomePageView";
 import ItemsPageView from "./components/ItemsPage/ItemsPageView";
+import SingleItemPage from "./components/SingleItemView/SingleItemPage";
 import SellView from "./components/SellView";
 import UserContext from "./contexts/UserContext";
 import axios from "axios";
@@ -35,6 +36,7 @@ const App = () => {
             <Routes>
               <Route path="/browse" element={<ItemsPageView />} />
               <Route path="/sell" element={<SellView />} />
+              <Route path="/item/:itemId" element={<SingleItemPage />} />
               <Route path="/" element={<HomePageView />} />
             </Routes>{" "}
           </main>

@@ -43,6 +43,23 @@
     background-color: white;
     padding: 1rem 3rem;
     outline: none;
+    @media only screen and (max-width: $bp-small) {
+      width: 90%;
+    }
+  }
+  &__buttons-box {
+    @media only screen and (max-width: $bp-small) {
+    }
+  }
+  &__sell {
+    @media only screen and (max-width: $bp-small) {
+      padding: 1.5rem 2rem !important;
+    }
+  }
+  &__signin {
+    @media only screen and (max-width: $bp-small) {
+      padding: 1.5rem 2rem !important;
+    }
   }
 
   @media only screen and (max-width: $bp-medium) {

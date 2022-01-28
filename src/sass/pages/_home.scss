@@ -17,6 +17,7 @@
 }
 
 .gallery {
+  padding: 1rem;
   box-shadow: 0 2rem 4rem rgba($color-black, 0.2);
 
   margin: 1rem;
@@ -36,7 +37,6 @@
     grid-template-columns: repeat(2, minmax(5rem, 13rem));
   }
   grid-gap: 0.2rem;
-  padding: 0.2rem;
   width: 100%;
   justify-content: center;
   z-index: 0;
@@ -168,6 +168,7 @@
     }
   }
   &__item {
+    cursor: pointer;
     transition: all 0.3s;
     overflow: hidden;
     position: relative;
@@ -236,7 +237,9 @@
     }
   }
   &__list-item:visited,
+  &__list-item,
   &__list-item:link {
+    cursor: pointer;
     color: $color-grey-light-1;
     display: block;
     text-decoration: none;

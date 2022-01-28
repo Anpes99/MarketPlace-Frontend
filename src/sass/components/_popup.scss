@@ -28,7 +28,7 @@
       $color-primary
     );
     width: 50rem;
-    height: 50rem;
+    height: 70rem;
     z-index: -100;
     opacity: 0;
     &-close {
@@ -46,6 +46,9 @@
       padding: 0.5rem 1rem;
       margin-top: 2rem;
       margin-bottom: auto;
+    }
+    @media only screen and (max-width: $bp-300) {
+      width: 100%;
     }
   }
   &:target {
