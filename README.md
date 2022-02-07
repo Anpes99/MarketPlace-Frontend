@@ -2,7 +2,6 @@ MarketPlace-frontend
 
 frontend for MarketPlace-backend
 
-https://vast-river-22640.herokuapp.com/
 
 url:
 
